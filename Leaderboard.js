@@ -9,7 +9,10 @@ let arr = JSON.parse(localStorage.getItem('users')) || [];
 
 const Members = (() => {
 
-	// un for username & points for score
+	/**
+	 * @param {string} un Indicates the username.
+	 * @param {number} points Indicates the score.
+	 */
 	
 	const _check = (un, points) => un.value === "" && isNaN(un.value.charAt(0)) && points.value === ""? false: true;
 
@@ -30,11 +33,15 @@ const Members = (() => {
 			}
 
 		if (_check(un, points)) {
-
-			const user = {
-				username: un.value,
-				score: +points.value // string to number
-			};
+			
+			class User {
+			    constructor(name, score) {
+				this.username = name;
+				this.score = +score;
+			    }
+			}
+			
+			const user = new User(un.value, points.value);
 
 			arr.push(user);
 			console.log(`%cUser "${arr[arr.length-1].username}" has been added \u2714`, 'color: orange; font-size: 14px');
