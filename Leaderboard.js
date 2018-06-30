@@ -5,13 +5,14 @@ const score = document.getElementById('score');
 const save = document.getElementById('save');
 const updateBtn = document.getElementById('update');
 const deleteBtn = document.getElementById('delete');
+
 let arr = JSON.parse(localStorage.getItem('users')) || [];
 
 const Members = (() => {
 
 	/**
-	 * @param {string} un Indicates the username.
-	 * @param {number} points Indicates the score.
+	 * @param {string} un - The user's username.
+	 * @param {number} points - The user's score.
 	 */
 	
 	const _check = (un, points) => un.value === "" && isNaN(un.value.charAt(0)) && points.value === ""? false: true;
@@ -19,7 +20,7 @@ const Members = (() => {
 	const CapsOff = un => un.value = un.value.toLowerCase();
 
 	function createUser(un, points) {
-		// automatically creates new local storage without having to refresh the page after clearing it
+		/** Automatically creates a new local storage w/o having to refresh the page after clearing it */
 		if (!('users' in localStorage)) {
 			arr = JSON.parse(localStorage.getItem('users')) || [];
 			localStorage.setItem('users', JSON.stringify(arr));
