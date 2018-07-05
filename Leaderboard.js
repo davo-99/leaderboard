@@ -8,7 +8,7 @@ const deleteBtn = document.getElementById('delete');
 
 let arr = JSON.parse(localStorage.getItem('users')) || [];
 
-const Members = (() => {
+const Users = (() => {
 
 	/**
 	 * @param {string} un - The user's username.
@@ -20,7 +20,7 @@ const Members = (() => {
 	const CapsOff = un => un.value = un.value.toLowerCase();
 
 	function createUser(un, points) {
-		/** Automatically creates a new local storage w/o having to refresh the page after clearing it */
+		// atomatically creates a new local storage w/o having to refresh the page after clearing it
 		if (!('users' in localStorage)) {
 			arr = JSON.parse(localStorage.getItem('users')) || [];
 			localStorage.setItem('users', JSON.stringify(arr));
@@ -98,7 +98,7 @@ const Members = (() => {
 	}
 })();
 
-username.addEventListener('blur', () => Members.CapsOff(username));
-save.addEventListener('click', () => Members.createUser(username, score));
-updateBtn.addEventListener('click', () => Members.updateUser(username, score));
-deleteBtn.addEventListener('click', () => Members.deleteUser(username));
+username.addEventListener('blur', () => Users.CapsOff(username));
+save.addEventListener('click', () => Users.createUser(username, score));
+updateBtn.addEventListener('click', () => Users.updateUser(username, score));
+deleteBtn.addEventListener('click', () => Users.deleteUser(username));
