@@ -35,14 +35,10 @@ const Users = (() => {
 
 		if (_check(un, points)) {
 			
-			class User {
-			    constructor(name, score) {
-				this.username = name;
-				this.score = +score;
-			    }
+			const user = {
+				username = un.value,
+				score = +points.value
 			}
-			
-			const user = new User(un.value, points.value);
 
 			arr.push(user);
 			console.log(`%cUser "${arr[arr.length-1].username}" has been added \u2714`, 'color: orange; font-size: 14px');
