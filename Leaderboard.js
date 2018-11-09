@@ -15,12 +15,12 @@ const Users = (() => {
 	 * @param {number} points - The user's score.
 	 */
 	
-	const _check = (un, points) => un.value === "" && isNaN(un.value.charAt(0)) && points.value === ""? false: true;
+	const _check = (un, points) => un.value === '' && isNaN(un.value.charAt(0)) && points.value === ''? false: true;
 
 	const CapsOff = un => un.value = un.value.toLowerCase();
 
 	function createUser(un, points) {
-		// atomatically creates a new local storage w/o having to refresh the page after clearing it
+		// creates a new local storage w/o having to refresh the page after clearing it
 		if (!('users' in localStorage)) {
 			arr = JSON.parse(localStorage.getItem('users')) || [];
 			localStorage.setItem('users', JSON.stringify(arr));
@@ -36,9 +36,9 @@ const Users = (() => {
 		if (_check(un, points)) {
 			
 			const user = {
-				username = un.value,
-				score = +points.value
-			}
+				username: un.value,
+				score: +points.value
+			};
 
 			arr.push(user);
 			console.log(`%cUser "${arr[arr.length-1].username}" has been added \u2714`, 'color: orange; font-size: 14px');
@@ -72,7 +72,7 @@ const Users = (() => {
 	function deleteUser(un) {
 		arr = JSON.parse(localStorage.getItem('users')) || [];
 
-		if (un.value !== "" && isNaN(un.value.charAt(0))) {
+		if (un.value !== '' && isNaN(un.value.charAt(0))) {
 
 			for (const [index, elem] of arr.entries()) {
 				if (elem.username === un.value) {
