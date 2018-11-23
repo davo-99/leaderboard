@@ -15,11 +15,11 @@ const Users = (() => {
 	 * @param {number} points - The user's score.
 	 */
 	
-	const _check = (un, points) => un.value === '' && isNaN(un.value.charAt(0)) && points.value === ''? false: true;
+	const _check = (un, points) => un.value === '' || !isNaN(un.value) || points.value === ''? false: true;	
 
 	const CapsOff = un => un.value = un.value.toLowerCase();
 
-	function createUser(un, points) {
+	const createUser = (un, points) => {
 		// creates a new local storage w/o having to refresh the page after clearing it
 		if (!('users' in localStorage)) {
 			arr = JSON.parse(localStorage.getItem('users')) || [];
@@ -41,14 +41,14 @@ const Users = (() => {
 			};
 
 			arr.push(user);
-			console.log(`%cUser "${arr[arr.length-1].username}" has been added \u2714`, 'color: orange; font-size: 14px');
+			console.log(`%cUser ${arr[arr.length-1].username} has been added \u2714`, 'color: orange; font-size: 14px');
 			arr.sort((a, b) => b.score - a.score);
 			console.table(arr);
 			localStorage.setItem('users', JSON.stringify(arr));
 		} else console.warn('Invalid input');
 	}
 
-	function updateUser(un, points) {
+	const updateUser = (un, points) => {
 		arr = JSON.parse(localStorage.getItem('users')) || [];
 
 		if (_check(un, points)) {
@@ -63,16 +63,16 @@ const Users = (() => {
 					arr.sort((a, b) => b.score - a.score);
 					console.table(arr);
 					break;
-				} else console.info(`User not found`);
+				} else console.info(`User ${un.value} not found`);
 			}
 			localStorage.setItem('users', JSON.stringify(arr));
 		} else console.warn('Invalid input');
 	}
 
-	function deleteUser(un) {
+	const deleteUser = un => {
 		arr = JSON.parse(localStorage.getItem('users')) || [];
 
-		if (un.value !== '' && isNaN(un.value.charAt(0))) {
+		if (un.value !== '' || isNaN(un.value)) {
 
 			for (const [index, elem] of arr.entries()) {
 				if (elem.username === un.value) {
@@ -80,7 +80,7 @@ const Users = (() => {
 					arr.splice(index, 1);
 					console.table(arr);
 					break;
-				} else console.info(`User doesn't exist`);
+				} else console.info(`User ${un.value} does not exist`);
 			}
 			localStorage.setItem('users', JSON.stringify(arr));
 		} else console.warn('Invalid input');
